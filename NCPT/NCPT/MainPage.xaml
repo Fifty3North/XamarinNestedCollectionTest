@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<yamvvm:YamvvmPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yamvvm="clr-namespace:F3N.YaMVVM.Views;assembly=F3N.YaMVVM"
+             xmlns:viewmodels="clr-namespace:NestedCollectionPerformanceTest.ViewModels"
+             mc:Ignorable="d"
+             x:Class="NestedCollectionPerformanceTest.MainPage" BackgroundColor="Black">
+
+    <ScrollView>
+    <StackLayout Padding="20">
+        <!-- Place new controls here -->
+        <Label FontSize="Medium" Text="Data provided by The Movie Database (TMDb) https://www.themoviedb.org/" TextColor="DarkGoldenrod" />
+        <Label FontSize="Medium" Text="Get your API key by creating an account, clicking settings and then API." TextColor="DarkGoldenrod" Margin="0,0,0,10" />
+        <Label Text="API Key" TextColor="DarkGoldenrod" />
+        <Entry Text="{Binding APIKey}" PlaceholderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BackgroundColor="#222222" />
+        <Button Text="Load Movies" Command="{Binding LoadMovies}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" Margin="0,0,0,40" />
+
+        <Button Text="Load Movies by Production Company" Command="{Binding LoadMoviesByCompany}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" Margin="0,0,0,40" />
+
+        <Label Text="Loading movies" IsVisible="{Binding Loading}" TextColor="DarkGoldenrod" />
+        <ActivityIndicator IsRunning="{Binding Loading}" IsVisible="{Binding Loading}" Color="DarkGoldenrod" />
+        
+        <Label Text="Preloading images" TextColor="DarkGoldenrod" IsVisible="{Binding Preloading}" />
+        <ActivityIndicator IsRunning="{Binding Preloading}" IsVisible="{Binding Preloading}" Color="DarkGoldenrod" />
+        
+        <Label Text="Getting production companies" TextColor="DarkGoldenrod" IsVisible="{Binding LoadingCompanies}" />
+        <ActivityIndicator IsRunning="{Binding LoadingCompanies}" IsVisible="{Binding LoadingCompanies}" Color="DarkGoldenrod" />
+        
+        <Button IsVisible="{Binding Ready}" Text="List View" Command="{Binding NavigateToListViewPage}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" />
+        <Button IsVisible="{Binding Ready}" Text="Collection View" Command="{Binding NavigateToCollectionViewPage}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" />
+        <Button IsVisible="{Binding Ready}" Text="Bindable Layout Stack Layout" Command="{Binding NavigateToBindableLayoutPage}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" />
+        <Button IsVisible="{Binding Ready}" Text="Bindable Layout Flex Layout" Command="{Binding NavigateToBindableLayoutFlexPage}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" />
+
+        <Button IsVisible="{Binding MoviesByCompanyReady}" Text="Nested List View" Command="{Binding NavigateToMoviesByCompanyListView}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" />
+
+
+            <Button IsVisible="{Binding MoviesByCompanyReady}" Text="Nested Bindable Layout" Command="{Binding NavigateToMoviesByCompanyBindableLayout}" BackgroundColor="Black" BorderColor="DarkGoldenrod" TextColor="DarkGoldenrod" BorderWidth="1" />
+    </StackLayout>
+    </ScrollView>
+</yamvvm:YamvvmPage>

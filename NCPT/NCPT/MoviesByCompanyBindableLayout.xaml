@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<yamvvm:YamvvmPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yamvvm="clr-namespace:F3N.YaMVVM.Views;assembly=F3N.YaMVVM"
+             xmlns:viewmodels="clr-namespace:NestedCollectionPerformanceTest.ViewModels"
+             xmlns:ffi="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Name="pgListViewPage"
+             mc:Ignorable="d"
+             x:Class="NestedCollectionPerformanceTest.MoviesByCompanyBindableLayout" BackgroundColor="Black">
+    <!--<ContentPage.BindingContext>
+        <viewmodels:MovieList />
+    </ContentPage.BindingContext>-->
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Production Companies" FontSize="32" TextColor="Gold" />
+            <Label Text="{Binding InitialisationTime, StringFormat='Loading time: {0}ms'}" TextColor="DarkGoldenrod" />
+            <ActivityIndicator Color="DarkGoldenrod" IsRunning="{Binding Loading}" IsVisible="{Binding Loading}" />
+            <ScrollView>
+            <StackLayout BindableLayout.ItemsSource="{Binding Companies}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        
+                            <Frame BackgroundColor="#444444" Padding="{OnIdiom Phone=10, Tablet=20}" Margin="5,10">
+
+                                
+                                <StackLayout Spacing="10">
+                                    <ffi:CachedImage Source="{Binding Key.LogoPath}" HeightRequest="{OnIdiom Phone=50, Tablet=75}" DownsampleToViewSize="True" VerticalOptions="Start" />
+                                    
+                                        <Label Text="{Binding Key.Name}" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Small, Tablet=Large}" />
+                                    <ScrollView Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Value.Movies}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout>
+                                                        <ffi:CachedImage Source="{Binding PosterPath}" WidthRequest="{OnIdiom Phone=85, Tablet=171}" DownsampleToViewSize="True" VerticalOptions="Start" />
+                                                        <Label WidthRequest="{OnIdiom Phone=85, Tablet=171}" Text="{Binding Title}" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Small, Tablet=Large}" LineBreakMode="TailTruncation" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </ScrollView>
+                                </StackLayout>
+
+                            </Frame>
+                        
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</yamvvm:YamvvmPage>

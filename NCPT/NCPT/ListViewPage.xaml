@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<yamvvm:YamvvmPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yamvvm="clr-namespace:F3N.YaMVVM.Views;assembly=F3N.YaMVVM"
+             xmlns:viewmodels="clr-namespace:NestedCollectionPerformanceTest.ViewModels"
+             xmlns:ffi="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Name="pgListViewPage"
+             mc:Ignorable="d"
+             x:Class="NestedCollectionPerformanceTest.ListViewPage" BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Movies" FontSize="32" TextColor="Gold" />
+            <Label Text="{Binding InitialisationTime, StringFormat='Loading time: {0}ms'}" TextColor="DarkGoldenrod" />
+            <ActivityIndicator Color="DarkGoldenrod" IsRunning="{Binding Loading}" IsVisible="{Binding Loading}" />
+            <ListView ItemsSource="{Binding Movies}" HasUnevenRows="True" x:Name="lstView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="#222222" Padding="{OnIdiom Phone=10, Tablet=20}" Margin="5,10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference pgListViewPage}, Path=BindingContext.ViewMovieDetail}" CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                                
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <ffi:CachedImage Source="{Binding PosterPath}" HeightRequest="{OnIdiom Phone=128, Tablet=256}" WidthRequest="{OnIdiom Phone=85, Tablet=171}" DownsampleToViewSize="True" VerticalOptions="Start" />
+                                    <StackLayout>
+                                        <Label Text="{Binding Title}" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Small, Tablet=Large}" />
+                                        <Label Text="{Binding Overview}" TextColor="White" VerticalOptions="StartAndExpand"  FontSize="{OnIdiom Phone=Micro, Tablet=Small}" />
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+                                            <Label Text="{Binding VoteAverage, StringFormat='Rating: {0}'}" TextColor="Goldenrod" HorizontalOptions="StartAndExpand" FontSize="{OnIdiom Phone=Micro, Tablet=Small}" />
+                                            <Label Text="{Binding ReleaseDate, StringFormat='Released: {0:MMMM dd, yyyy}'}" TextColor="Goldenrod" HorizontalOptions="End" FontSize="{OnIdiom Phone=Micro, Tablet=Small}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</yamvvm:YamvvmPage>

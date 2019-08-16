@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="F3N.YaMVVM" Version="1.0.2" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
+    <PackageReference Include="TMDbLib" Version="1.4.0-alpha" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.673161-pre3" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.0-pre" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BindableLayoutFlexPage.xaml.cs">
+      <DependentUpon>BindableLayoutFlexPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="BindableLayoutPage.xaml.cs">
+      <DependentUpon>BindableLayoutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CollectionViewPage.xaml.cs">
+      <DependentUpon>CollectionViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MoviesByCompanyBindableLayout.xaml.cs">
+      <DependentUpon>MoviesByCompanyBindableLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MoviesByCompanyListView.xaml.cs">
+      <DependentUpon>MoviesByCompanyListView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ListViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MovieDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ListViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>

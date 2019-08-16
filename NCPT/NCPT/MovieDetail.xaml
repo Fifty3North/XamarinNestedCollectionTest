@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<yamvvm:YamvvmPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yamvvm="clr-namespace:F3N.YaMVVM.Views;assembly=F3N.YaMVVM"
+             xmlns:ffi="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewmodels="clr-namespace:NestedCollectionPerformanceTest.ViewModels"
+             mc:Ignorable="d"
+             x:Class="NestedCollectionPerformanceTest.MovieDetail"
+                   BackgroundColor="Black">
+    <ContentPage.BindingContext>
+        <viewmodels:MovieDetailViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        
+        <Grid>
+            <ffi:CachedImage Source="{Binding Movie.BackdropPath}" VerticalOptions="FillAndExpand" Aspect="AspectFill" DownsampleWidth="800" DownsampleToViewSize="True" />
+            <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+
+                <Frame BackgroundColor="#CC222222" Padding="20" VerticalOptions="FillAndExpand">
+                        <StackLayout>
+                    <StackLayout >
+                         <ActivityIndicator IsVisible="{Binding Loading}" IsRunning="{Binding Loading}" HorizontalOptions="Center" Color="DarkGoldenrod" VerticalOptions="Center" />
+                        <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand">
+                            
+                            <ffi:CachedImage Source="{Binding Movie.PosterPath}" WidthRequest="{OnIdiom Phone=140, Tablet=300}" DownsampleToViewSize="True" VerticalOptions="Start">
+                                <ffi:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="{Binding Movie.Homepage}" />
+                                </ffi:CachedImage.GestureRecognizers>
+                            </ffi:CachedImage>
+                            <StackLayout>
+                                <Label Text="{Binding Movie.Title}" TextColor="Goldenrod" FontSize="{OnIdiom Tablet=Large, Phone=Medium}" />
+                                        <Label Text="{Binding Movie.Tagline}" TextColor="DarkGoldenrod" FontSize="{OnIdiom Tablet=Medium, Phone=Small}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Rating:" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Micro, Tablet=Small}" />
+                                        <Label Text="{Binding Movie.VoteAverage}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"   />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <Label Text="Release Date:" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"   />
+                                        <Label Text="{Binding Movie.ReleaseDate, StringFormat='{0:MMMM dd, yyyy}'}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <Label Text="Duration:" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                        <Label Text="{Binding Movie.Runtime, StringFormat='{0} minutes'}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                </StackLayout>
+                                        <StackLayout IsVisible="{Binding Movie.Budget}" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label Text="Budget:" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                            <Label Text="{Binding Movie.Budget, StringFormat='{0:C0}'}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label Text="Revenue:" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                            <Label Text="{Binding Movie.Revenue, StringFormat='{0:C0}'}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label Text="Genres:" TextColor="Goldenrod" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                            <StackLayout BindableLayout.ItemsSource="{Binding Movie.Genres}" Orientation="Horizontal">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label Text="{Binding Name}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"   />
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                            <Label Text="Production Countries:" TextColor="Goldenrod"  LineBreakMode="NoWrap" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                            <StackLayout BindableLayout.ItemsSource="{Binding Movie.ProductionCountries}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label Text="{Binding Name}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                            <Label Text="Production Companies:" TextColor="Goldenrod" LineBreakMode="NoWrap" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                            <StackLayout BindableLayout.ItemsSource="{Binding Movie.ProductionCompanies}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label Text="{Binding Name}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Small}"  />
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                        </StackLayout>
+                        <StackLayout Padding="0,20">
+                                <Label Text="{Binding Movie.Overview}" TextColor="White" FontSize="{OnIdiom Phone=Micro, Tablet=Medium}"  />
+                        </StackLayout>
+                            </StackLayout>
+                            <ScrollView Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Images.Posters}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <ffi:CachedImage Source="{Binding}" HeightRequest="300" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
+            
+        </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</yamvvm:YamvvmPage>
